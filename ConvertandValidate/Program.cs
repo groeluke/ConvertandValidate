@@ -13,49 +13,52 @@ Computer Fundamentals and Introduction to Programming
  [] If not, do not update the integer variable.
  */
 
-namespace ConvertandValidate
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            int number = 2;
-            Console.WriteLine(number);
-            SetName(number); //number is unchanged
-            Console.WriteLine(number);
-            SetNameRef(ref number);//number is changed
-            Console.WriteLine(number);
-            SetNameOut(out number);//number is changed
-            Console.WriteLine(number);
-            Console.Read();
-        }
-        /// <summary>
-        /// Has no affect on callers original variable
-        /// </summary>
-        /// <param name="aNumber"></param>
-        static void SetName(int aNumber)
-        {
-            aNumber = 5;
-        }
-        /// <summary>
-        /// Passes a reference of the callers original variable <br></br>
-        /// This can change the value of the callers original value
-        /// </summary>
-        /// <param name="theNumber"></param>
-        static void SetNameRef(ref int theNumber)
-        {
-            theNumber = 7;
-        }
-        /// <summary>
-        /// Passes a reference of the callers original variable <br></br>
-        /// This can change the value of the callers original value <br></br>
-        /// Allows unassigned variable. int number; 
-        /// </summary>
-        /// <param name="someNumber"></param>
-        static void SetNameOut(out int someNumber)
-        {
-            someNumber = 3;
-        }
+  namespace ConvertandValidate
+  {
+      internal class Program
+      {
+          static bool TryConvert(string text, out int result)
+          {
+              result = 0;     // must assign something to out parameter
 
+              // Try to convert - if it works we keep the number
+              // if it fails we leave result as 0 and return false
+              bool worked = int.TryParse(text, out result);
+
+              return worked;
+          }
+
+          static void Main(string[] args)
+          {
+              string answer;
+
+              do
+              {
+                  Console.Write("\nEnter a whole number (or type quit to stop): ");
+                  answer = Console.ReadLine();
+
+                  if (answer == "quit" || answer == "Quit")
+                  {
+                      break;
+                  }
+
+                  int userInput;
+                  bool success = TryConvert(answer, out userInput);
+
+                  if (success)
+                  {
+                      Console.WriteLine("Good! The number is: " + userInput);
+                  }
+                  else
+                  {
+                      Console.WriteLine("Sorry, '" + answer + "' is not a valid number.");
+                  }
+
+              } while (true);
+
+                Console.WriteLine("Thanks for playing!");
+                Console.WriteLine("Press enter to close.");
+                Console.Read();
+            }
+        }
     }
-}
