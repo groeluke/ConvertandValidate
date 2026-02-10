@@ -15,40 +15,43 @@ https://github.com/groeluke/ConvertandValidate.git
 
 namespace ConvertandValidate
   {
-      internal class Program
-      {
+    internal class Program
+    {
 
-          static void Main(string[] args)
-          {
-              string answer;
+        static void Main(string[] args)
+        {
+            string answer;
               
-              do
-              {
-                  Console.Write("\nEnter a integer value or type (Q) to exit: ");
-                  answer = Console.ReadLine();
+            do
+            {
+                Console.Write("\nEnter a integer value or type (Q) to exit: ");
+                answer = Console.ReadLine();
 
-                  if (answer == "Q" || answer == "q") // exit console if q is entered
-                  {
-                      break;
-                  }
-
-                if (int.TryParse(answer, out int userInput)) // 
+                // if Q is entered the console will close
+                if (answer == "Q" || answer == "q") 
+                {
+                    break;
+                }
+                // if TryPasre is true then Good
+                if (int.TryParse(answer, out int userInput))
                 {
                     Console.WriteLine("Good! The number is: " + userInput);
                     Console.WriteLine("Hit enter to try another.");
                 }
-                else //
+                // else tell the user it is false and retry
+                else
                 {
-                    Console.WriteLine("Sorry, '" + answer + "' is not a valid integer value.");
+                    Console.WriteLine("Sorry, '" + answer
+                    + "' is not a valid integer value.");
                 }
-                Console.ReadLine();
-                Console.Clear();
-              } while (true);
+                Console.ReadLine(); //puase to display input + message
+                Console.Clear(); // clear the old attempt
+            } while (true);
 
-              Console.WriteLine("Press enter to close.");
+            Console.WriteLine("Press enter to close.");
 
-              // pause 
-              Console.Read();
-          }
-      }
-  }
+            // pause 
+            Console.Read();
+        }
+    }
+}
