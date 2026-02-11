@@ -1,7 +1,7 @@
 ﻿/*Luke Groesbeck
 Spring 2026
 RCET 2265
-Project MultiplicationTable
+Project CovertandValidate
 Computer Fundamentals and Introduction to Programming
 https://github.com/groeluke/ConvertandValidate.git
 */
