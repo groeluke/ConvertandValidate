@@ -14,44 +14,58 @@ https://github.com/groeluke/ConvertandValidate.git
  */
 
 namespace ConvertandValidate
-  {
+{
     internal class Program
     {
-
         static void Main(string[] args)
         {
-            string answer;
-              
             do
             {
-                Console.Write("\nEnter a integer value or type (Q) to exit: ");
-                answer = Console.ReadLine();
+                Console.Write("Enter an integer value or type (Q) to exit: ");
+                string answer = Console.ReadLine();
 
-                // if Q is entered the console will close
-                if (answer == "Q" || answer == "q") 
+                // if q is entered, the program will end
+                if (answer == "Q" || answer == "q")
                 {
                     break;
                 }
-                // if TryPasre is true then Good
-                if (int.TryParse(answer, out int userInput))
+                // if the answer is not q, the program will try to convert the answer to an integer and display the result if true
+                if (ConvertToInt(answer, out int number))
                 {
-                    Console.WriteLine("Good! The number is: " + userInput);
-                    Console.WriteLine("Hit enter to try another.");
+                    Console.WriteLine($"{answer} is a valid integer value");
                 }
-                // else tell the user it is false and retry
+                // else, the program will display an error message if the answer is not a valid integer value
                 else
                 {
-                    Console.WriteLine("Sorry, '" + answer
-                    + "' is not a valid integer value.");
+                    Console.WriteLine($"{answer} is not a valid integer value.");
                 }
-                Console.ReadLine(); //puase to display input + message
-                Console.Clear(); // clear the old attempt
-            } while (true);
 
-            Console.WriteLine("Press enter to close.");
+                Console.WriteLine("Press Enter to try again.");
+                Console.ReadLine();
+                Console.Clear(); // clear the console for the next input
 
-            // pause 
-            Console.Read();
+            } while (true); // loop until the user decides to exit
+
+            Console.WriteLine("Press Enter to close.");
+            Console.ReadLine();
+        }
+
+        // method that takes a string input and an out integer variable, tries to convert the string to an integer and returns if the conversion was successful
+        static bool ConvertToInt(string input, out int result)
+        {
+            result = 0;
+            // try to convert the input string to an integer
+            try 
+            {
+                result = int.Parse(input);
+                return true;
+            }
+            // catch the exception if the input string is not valid and return false
+            catch (FormatException) 
+            {
+                return false;
+            }
+            
         }
     }
 }
